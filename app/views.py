@@ -53,3 +53,6 @@ def userregister(request):
 def userlogout(request):
     logout(request)
     return redirect('userlogin')
+
+def post(request, pk):
+    return render(request, 'post.html', {'pk':pk})
