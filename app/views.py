@@ -21,10 +21,7 @@ def userlogin(request):
         if user is not None:
             login(request, user)
             messages.info(request, f"Welcome {username}")
-            context = {
-                'username': 'imrankhan'
-            }
-            return redirect('home')
+            return redirect('/')
         else:
             messages.info(request, 'Invalid Credintial!')
             return render(request, 'login.html')
