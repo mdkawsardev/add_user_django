@@ -1,8 +1,16 @@
 {% extends "base.html" %}
 {% block title %}Home Page{% endblock title %}
 {% block body %}
+{% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>{{message}}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    {% endif %}
     <div class="container">
-        <h1 class="mt-5">Welcome Home</h1>
+        <h1 class="mt-5">Welcome {{username}}</h1>
         <a href="{% url 'userlogout'%}">Logout</a>
     </div>
 {% endblock body %}
