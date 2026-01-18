@@ -2,13 +2,17 @@ from django.shortcuts import render, redirect
 from .forms import LoginForm
 from .models import LoginUser
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 # Create your views here.
 def home(request):
+    if not request.user.is_authenticated:
+        return redirect('/login')
     return render(request, 'index.html')
 
 def userlogin(request):
+    if request.user.is_authenticated:
+        return redirect('home')
     if request.method == "POST":
         username = request.POST['username']
         email = request.POST['email']
@@ -22,7 +26,7 @@ def userlogin(request):
             }
             return redirect('home')
         else:
-            messages.info(request, 'Invalid Credinsial!')
+            messages.info(request, 'Invalid Credintial!')
             return render(request, 'login.html')
     return render(request, 'login.html')
 
@@ -50,4 +54,5 @@ def userregister(request):
     return render(request, 'register.html')
 
 def userlogout(request):
-    return render(request, 'logout.html')
+    logout(request)
+    return redirect('userlogin')
