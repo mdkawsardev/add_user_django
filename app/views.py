@@ -6,8 +6,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 # Create your views here.
 def home(request):
-    if not request.user.is_authenticated:
-        return redirect('/login')
+    # if not request.user.is_authenticated:
+    #     return redirect('/login')
     return render(request, 'index.html')
 
 def userlogin(request):
